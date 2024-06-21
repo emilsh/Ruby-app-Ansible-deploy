@@ -1,4 +1,4 @@
-# Ansible Role: Ruby Application Deployment with Nginx Load Balancer
+# Ansible: Ruby Application Deployment with Nginx Load Balancer
 
 This Ansible role automates the deployment and management of a Ruby on Rails application called xpaste_practicum on CentOS 7 servers, using Nginx as a reverse proxy and load balancer. It includes tasks for installing dependencies, deploying the application code, configuring Nginx, and starting the application service.
 

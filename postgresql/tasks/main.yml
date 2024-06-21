@@ -19,31 +19,31 @@
   args:
     creates: "/var/lib/pgsql/data/pg_hba.conf"
 
-- name: Ensure PostgreSQL is running and enabled
+- name: "Ensure PostgreSQL is running and enabled"
   ansible.builtin.service:
     name: "postgresql"
     state: "started"
     enabled: true
 
-- name: Configure PostgreSQL to allow password authentication
+- name: "Configure PostgreSQL to allow password authentication"
   ansible.builtin.lineinfile:
-    path: /var/lib/pgsql/data/pg_hba.conf
+    path: "/var/lib/pgsql/data/pg_hba.conf"
     regexp: '^#?(host\s+all\s+all\s+127\.0\.0\.1\/32\s+)ident$'
     line: 'host    all             all             127.0.0.1/32            md5'
 
-- name: Restart PostgreSQL to apply configuration changes
+- name: "Restart PostgreSQL to apply configuration changes"
   ansible.builtin.service:
     name: "postgresql"
     state: "restarted"
 
-- name: Create database user
+- name: "Create database user"
   become_user: "postgres"
   community.postgresql.postgresql_user:
     name: "{{ db_user }}"
     password: "{{ db_password }}"
     role_attr_flags: "LOGIN"
 
-- name: Create database
+- name: "Create database"
   become_user: "postgres"
   community.postgresql.postgresql_db:
     name: "{{ db_name }}"

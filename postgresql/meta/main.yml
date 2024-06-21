@@ -1,7 +1,7 @@
 galaxy_info:
-  author: Emil Shafigin
-  description: This role is intended to install Postgresql
-  company: Slurm DevOps Upgrade 8
+  author: "Emil Shafigin"
+  description: "This role is intended to install Postgresql"
+  company: "Slurm DevOps Upgrade 8"
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

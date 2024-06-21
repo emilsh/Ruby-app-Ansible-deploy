@@ -1,0 +1,33 @@
+---
+
+- include_tasks: "install_ruby_from_source.yml"
+
+- name: "Copy application"
+  ansible.builtin.copy:
+    src: "files/xpaste_practicum/"
+    dest: "/app/public/"
+    owner: "vagrant"
+    group: "vagrant"
+    mode: "0644"
+
+- name: "Configure Bundler"
+  command: "bundle config build.nokogiri --use-system-libraries"
+  args:
+    chdir: "/app/public/"
+
+- name: "Install application dependencies"
+  command: "bundle install --clean --force --no-cache --without development"
+  args:
+    chdir: "/app/public/"
+
+- name: "Create systemd service file"
+  template:
+    src: "xpaste.service.j2"
+    dest: "/etc/systemd/system/xpaste.service"
+  notify:
+    - "Reload systemd"
+    - "Enable and start xpaste"
+
+
+
+

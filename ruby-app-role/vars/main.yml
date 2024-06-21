@@ -1,0 +1,8 @@
+---
+__ruby_build_packages:
+  - '@development tools'
+  - zlib-devel
+  - openssl-static
+  - libxml2-devel
+  - libxslt-devel
+  - libffi-devel

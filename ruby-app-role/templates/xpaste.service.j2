@@ -1,0 +1,21 @@
+[Unit]
+Description=XPaste Application
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/app/public
+Environment=SECRET_KEY_BASE={{ secret_key_base }}
+Environment=RAILS_ENV=production
+Environment=RAILS_LOG_TO_STDOUT=1
+Environment=DB_HOST=127.0.0.1
+Environment=DB_PORT=5432
+Environment=DB_NAME={{ db_name }}
+Environment=DB_USER={{ db_user }}
+Environment=DB_PASSWORD={{ db_password }}
+ExecStart=/bin/bash -lc 'bundle exec rake db:migrate && bundle exec puma -b unix:///var/run/puma.sock -e $RAILS_ENV config.ru'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

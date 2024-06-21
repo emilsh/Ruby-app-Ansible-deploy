@@ -1,0 +1,7 @@
+---
+workspace: "/root"
+
+ruby_download_url: "https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.1.tar.gz"
+ruby_version: "2.5.1"
+
+ruby_source_configure_command: "./configure --enable-shared"

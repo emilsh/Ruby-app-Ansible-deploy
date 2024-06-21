@@ -1,5 +1,5 @@
 ---
-
+- include_tasks: "install_nodejs.yml"
 - include_tasks: "install_ruby_from_source.yml"
 
 - name: "Copy application"

@@ -1,11 +1,11 @@
 ---
 - name: "Installing xpaste application"
-  hosts: application-server
+  hosts: "application-server"
   become: true
   vars:
-    db_user: xpaste_user
-    db_password: xpaste_password
-    db_name: xpaste_db
+    db_user: "xpaste_user"
+    db_password: "xpaste_password"
+    db_name: "xpaste_db"
     secret_key_base: "your_secret_key_base"
 
   roles:
@@ -14,13 +14,13 @@
   - geerlingguy.nginx
 
   tasks:
-  - name: Copy custom nginx configuration
+  - name: "Copy custom nginx configuration"
     ansible.builtin.copy:
       src: "files/xpaste_practicum/config/nginx.conf"
       dest: "/etc/nginx/nginx.conf"
       mode: '0644'
 
   - name: "Reload nginx"
-    service:
+    ansible.builtin.service:
       name: "nginx"
       state: "reloaded"

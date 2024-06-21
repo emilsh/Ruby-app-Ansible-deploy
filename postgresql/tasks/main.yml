@@ -1,29 +1,29 @@
 ---
-- name: Install PostgreSQL
+- name: "Install PostgreSQL"
   ansible.builtin.yum:
-    name: postgresql-server
-    state: present
+    name: "postgresql-server"
+    state: "present"
 
-- name: Install psycopg2
+- name: "Install psycopg2"
   ansible.builtin.yum:
-    name: python-psycopg2
-    state: present    
+    name: "python-psycopg2"
+    state: "present"    
 
-- name: Install postgresql-devel
+- name: "Install postgresql-devel"
   ansible.builtin.yum:
-    name: postgresql-devel
-    state: present   
+    name: "postgresql-devel"
+    state: "present"   
 
-- name: Initialize PostgreSQL database
-  command: /usr/bin/postgresql-setup initdb
+- name: "Initialize PostgreSQL database"
+  ansible.builtin.command: "/usr/bin/postgresql-setup initdb"
   args:
-    creates: /var/lib/pgsql/data/pg_hba.conf
+    creates: "/var/lib/pgsql/data/pg_hba.conf"
 
 - name: Ensure PostgreSQL is running and enabled
   ansible.builtin.service:
-    name: postgresql
-    state: started
-    enabled: yes
+    name: "postgresql"
+    state: "started"
+    enabled: true
 
 - name: Configure PostgreSQL to allow password authentication
   ansible.builtin.lineinfile:
@@ -33,18 +33,18 @@
 
 - name: Restart PostgreSQL to apply configuration changes
   ansible.builtin.service:
-    name: postgresql
-    state: restarted
+    name: "postgresql"
+    state: "restarted"
 
 - name: Create database user
-  become_user: postgres
+  become_user: "postgres"
   community.postgresql.postgresql_user:
     name: "{{ db_user }}"
     password: "{{ db_password }}"
-    role_attr_flags: LOGIN
+    role_attr_flags: "LOGIN"
 
 - name: Create database
-  become_user: postgres
+  become_user: "postgres"
   community.postgresql.postgresql_db:
     name: "{{ db_name }}"
     owner: "{{ db_user }}"

@@ -11,17 +11,17 @@
     mode: "0644"
 
 - name: "Configure Bundler"
-  command: "bundle config build.nokogiri --use-system-libraries"
+  ansible.builtin.command: "bundle config build.nokogiri --use-system-libraries"
   args:
     chdir: "/app/public/"
 
 - name: "Install application dependencies"
-  command: "bundle install --clean --force --no-cache --without development"
+  ansible.builtin.command: "bundle install --clean --force --no-cache --without development"
   args:
     chdir: "/app/public/"
 
 - name: "Create systemd service file"
-  template:
+  ansible.builtin.template:
     src: "xpaste.service.j2"
     dest: "/etc/systemd/system/xpaste.service"
   notify:

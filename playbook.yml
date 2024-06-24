@@ -2,7 +2,6 @@
 # This playbook installs and configures the xpaste application.
 # It defines variables for the database user, password, database name, and secret key base.
 # These variables can be overridden if necessary.
-# The source code of the xpaste application is in the files/xpaste_practicum folder.
 
 # Note: Ensure the 'geerlingguy.nginx' role is installed from Ansible Galaxy before running this playbook.
 # You can install the role using the following command:

@@ -1,11 +1,13 @@
 ---
+# This role installs Ruby and the necessary dependencies to run the xpaste application
+
 - include_tasks: "install_nodejs.yml"
 - include_tasks: "install_ruby_from_source.yml"
 
 - name: "Copy application"
   ansible.builtin.copy:
     src: "files/xpaste_practicum/"
-    dest: "/app/public/"
+    dest: "{{ application_path }}"
     owner: "vagrant"
     group: "vagrant"
     mode: "0644"
@@ -13,12 +15,12 @@
 - name: "Configure Bundler"
   ansible.builtin.command: "bundle config build.nokogiri --use-system-libraries"
   args:
-    chdir: "/app/public/"
+    chdir: "{{ application_path }}"
 
 - name: "Install application dependencies"
   ansible.builtin.command: "bundle install --clean --force --no-cache --without development"
   args:
-    chdir: "/app/public/"
+    chdir: "{{ application_path }}"
 
 - name: "Create systemd service file"
   ansible.builtin.template:

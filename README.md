@@ -17,6 +17,7 @@ This Ansible role automates the deployment and management of a Ruby on Rails app
 - Target servers must be running CentOS 7.
 - Ansible 2.9 or higher installed on the control node.
 - Access to the Internet or local package repository for package installation.
+- Ensure the 'geerlingguy.nginx' role is installed from Ansible Galaxy before running this playbook.
 
 ## Run the playbook:
 ansible-playbook playbook.yml

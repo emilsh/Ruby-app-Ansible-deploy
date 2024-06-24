@@ -4,13 +4,23 @@
 - include_tasks: "install_nodejs.yml"
 - include_tasks: "install_ruby_from_source.yml"
 
-- name: "Copy application"
+- name: Create a .ssh directory
+  ansible.builtin.file:
+    path: "~/.ssh/"
+    state: directory
+
+- name: "Copy private key"
   ansible.builtin.copy:
-    src: "files/xpaste_practicum/"
+    src: "~/.ssh/id_rsa"
+    dest: "~/.ssh/id_rsa"
+    mode: "0600"
+
+- name: "Clone application from remote repository"
+  ansible.builtin.git:
+    repo: "git@gitlab.slurm.io:edu/xpaste_practicum.git"
     dest: "{{ application_path }}"
-    owner: "vagrant"
-    group: "vagrant"
-    mode: "0644"
+    key_file: "~/.ssh/id_rsa"
+    accept_hostkey: true
 
 - name: "Configure Bundler"
   ansible.builtin.command: "bundle config build.nokogiri --use-system-libraries"

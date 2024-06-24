@@ -1,5 +1,7 @@
 galaxy_info:
-  author: "Emil Shafigin"
+  # role_name: "ruby-app-role"
+  # namespace: "emilsh"
+  author: emilsh
   description: "This role is intended to install Ruby and all necessary dependencies, as well as deploy the xpaste application"
   company: "Slurm DevOps Upgrade 8"
 
@@ -16,7 +18,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: license (GPL-2.0-or-later, MIT, etc)
 
-  min_ansible_version: 2.1
+  min_ansible_version: 2.9
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:

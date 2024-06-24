@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    application_path: "/app/public/"
+  tasks:
+    - name: "Include ruby-app-role"
+      include_role:
+        name: "emilsh.ruby-app-role"

@@ -26,8 +26,9 @@
   tasks:
   - name: "Copy custom nginx configuration"
     ansible.builtin.copy:
-      src: "files/xpaste_practicum/config/nginx.conf"
+      src: "{{ application_path }}config/nginx.conf"
       dest: "/etc/nginx/nginx.conf"
+      remote_src: true
       mode: '0644'
 
   - name: "Change path to application in nginx.conf"

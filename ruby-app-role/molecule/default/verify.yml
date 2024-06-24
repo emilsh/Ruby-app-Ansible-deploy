@@ -1,0 +1,25 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: "Check that application folder exists"
+    ansible.builtin.stat:
+      path: "{{ application_path }}"
+    register: app_folder_result
+
+  - name: "Application folder assertion"
+    ansible.builtin.assert:
+      that: app_folder_result.stat.exists
+
+  - name: "Check that config.ru file exists"
+    ansible.builtin.stat:
+      path: "{{ application_path }}/config.ru"
+    register: config_file_result
+
+  - name: "Config.ru file assertion"
+    ansible.builtin.assert:
+      that: config_file_result.stat.exists
+  

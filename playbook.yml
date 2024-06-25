@@ -9,7 +9,7 @@
 # ansible-galaxy role install geerlingguy.nginx
 
 - name: "Installing xpaste application"
-  hosts: "application-server"
+  hosts: "application-servers"
   become: true
   vars:
     db_user: "xpaste_user"

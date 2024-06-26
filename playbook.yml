@@ -11,6 +11,9 @@
 - name: "Installing xpaste application"
   hosts: "application-servers"
   become: true
+  vars_files:
+    - secrets.yml
+    - main.yml
 
   roles:
   - postgresql

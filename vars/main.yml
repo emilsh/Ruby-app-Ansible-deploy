@@ -1,0 +1,9 @@
+vars:
+    db_user: "xpaste_user"
+    db_name: "xpaste_db"
+    db_password: "{{ password }}"
+    secret_key_base: "{{ secret_key }}"
+    application_path: "/app/public/"
+
+vars_files:
+  - secrets.yml

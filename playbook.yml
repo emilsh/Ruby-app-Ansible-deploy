@@ -1,4 +1,3 @@
----
 # This playbook installs and configures the xpaste application.
 # It defines variables for the database user and database name.
 # These variables can be overridden if necessary.
@@ -8,38 +7,13 @@
 # You can install the role using the following command:
 # ansible-galaxy role install geerlingguy.nginx
 
+---
 - name: "Installing xpaste application"
   hosts: "application-servers"
   become: true
-  vars:
-    db_user: "xpaste_user"
-    db_name: "xpaste_db"
-    db_password: "{{ password }}"
-    secret_key_base: "{{ secret_key }}"
-    application_path: "/app/public/"
-  vars_files:
-    - secrets.yml
 
   roles:
-  - postgresql          # Role to install and configure PostgreSQL
-  - ruby-app-role       # Role to install and configure the Ruby application
-  - geerlingguy.nginx   # Role to install and configure Nginx
-
-  tasks:
-  - name: "Copy custom nginx configuration"
-    ansible.builtin.copy:
-      src: "{{ application_path }}config/nginx.conf"
-      dest: "/etc/nginx/nginx.conf"
-      remote_src: true
-      mode: '0644'
-
-  - name: "Change path to application in nginx.conf"
-    ansible.builtin.lineinfile:
-      path: "/etc/nginx/nginx.conf"
-      regexp: "root /app/public;"
-      line: "root {{ application_path }};"
-
-  - name: "Reload nginx"
-    ansible.builtin.service:
-      name: "nginx"
-      state: "reloaded"
+  - postgresql
+  - ruby-app-role
+  - geerlingguy.nginx
+  - nginx_conf_change
